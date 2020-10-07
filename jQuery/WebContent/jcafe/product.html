@@ -22,7 +22,7 @@
 				// 화면에 보여주도록
 				let fields = [ 'item_no', 'item', 'price', 'content', 'image' ]
 				let table = $('<table />').attr({
-					'id' : 'tble',
+					'id' : 'tbl',
 					'border' : '1',
 					'style' : 'border-collapse:collapse; text-align:center'
 				});
@@ -35,12 +35,24 @@
 				
 				table.append(tr);
 
+				/*
+				이거.. 밑에 image null 체크하는거
+				 else if(field == 'image') {
+							console.log("image인데");
+							if(obj[field] == null || obj[field] == "") {
+								console.log("null인데");
+								tr.append($('<td />').val('').attr('style', 'padding:10px'));
+							} else if(obj[field] != null || obj[field] != "") {
+								console.log(obj[field]+" not null인데");
+							}
+						}
+				*/
 				$(data).each(function(idx, obj) {
 					tr = $('<tr />');
 					// for (field in obj) {	// 전체 데이터 출력
 					for (field of fields) {	// 원하는 필드 데이터만 출력할 때
 						if(field == 'item_no') {
-							let atag = $('<a />').attr('href', 'item.jsp?itemNo='+obj.itemNo).html(obj[field]);
+							let atag = $('<a />').attr('href', 'item.jsp?itemNo='+obj.item_no).html(obj[field]);
 							tr.append($('<td />').html(atag));
 						} else {
 							tr.append($('<td />').html(obj[field]).attr('style', 'padding:10px'));
@@ -50,7 +62,6 @@
 				});
 
 				$('#showResult').append(table);
-
 			},
 			error : function(result) {
 				console.log(result);
@@ -66,6 +77,9 @@
 				success: function(a, b) {
 					console.log(a, b);
 					alert('OK');
+					//location.reload(true);	// refresh
+					addRow();
+					$('input[name="image"]').val('');
 				},
 				error: function(a, b) {
 					console.log(a, b);
@@ -73,6 +87,26 @@
 			});
 		});
 	});
+	
+	function addRow() {
+		let image = $('input[name="image"]').val();
+		let tr=$('<tr />');
+		let atag = $('<a />').attr('href', 'item.jsp?itemNo='+$('input[name="itemNo"]').val()).html($('input[name="itemNo"]').val());
+		tr.append($('<td />').html(atag));
+		
+		if(image == null || image == "") {
+			image = '';
+		}
+		
+		tr.append(
+			$('<td />').html($('input[name="item"]').val()),
+			$('<td />').html($('input[name="price"]').val()),
+			$('<td />').html($('input[name="content"]').val()),
+			$('<td />').html($('input[name="image"]').val())
+		);
+		console.log("tr : "+tr);
+		$('#tbl').append(tr);
+	}
 	
 	function file_open() {
 		window.open("upload.jsp", "upload", "width=300 height=200 left=300 top 30");
@@ -109,7 +143,7 @@
 			</tr>
 			<tr>
 				<td>Image</td>
-				<td><input type="text" name="image"> <input
+				<td><input type="text" name="image" readonly> <input
 					type="button" value="파일첨부" onclick="file_open()"></td>
 			</tr>
 			<tr align="center">

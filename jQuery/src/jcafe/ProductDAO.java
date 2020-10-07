@@ -18,6 +18,19 @@ public class ProductDAO {
 		conn = ConnectDB.getConnection();
 	}
 
+	// 한 건 삭제
+	public void deleteProduct(String itemNo) {
+		String sql = "delete product where item_no = ?";
+		System.out.println("delete : "+itemNo);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, itemNo);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	// 한 건 입력
 	public void insertProduct(ProductVO vo) {
 		String sql = "insert into product(item_no, item, category, price, link, content, like_it, alt, image) "
@@ -39,6 +52,12 @@ public class ProductDAO {
 			System.out.println(r + "건 입력됨");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -77,7 +96,7 @@ public class ProductDAO {
 	// 전체 조회
 	public List<ProductVO> getProductList() {
 		List<ProductVO> list = new ArrayList<>();
-		String sql = "select * from product";
+		String sql = "select * from product order by item_no";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
