@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery_plugin.html</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <style>
+        .gallery_wrap {
+            padding-left: 25%;
+            padding-right: 25%;
+        }
+
+        .slide_gallery img {
+            width: 400px;
+            height: 300px;
+            margin: auto;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('.slide_gallery').bxSlider({
+                auto: true,
+                autoControls: true,
+                stopAutoOnClick: true,
+                pager: true,
+                captions: true  /* img에 준 title 표시 */
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="gallery_wrap">
+        <div class="slide_gallery">
+            <li><img src="../images/pic_1.jpg" alt="사진1" title="사진1입니다"></li>
+            <li><img src="../images/pic_2.jpg" alt="사진2"></li>
+            <li><img src="../images/pic_3.jpg" alt="사진3"></li>
+            <li><img src="../images/pic_4.jpg" alt="사진4"></li>
+            <li><img src="../images/pic_5.jpg" alt="사진5"></li>
+            <li><img src="../images/pic_6.jpg" alt="사진6"></li>
+            <li><img src="../images/pic_7.jpg" alt="사진7"></li>
+            <li><img src="../images/pic_8.jpg" alt="사진8"></li>
+            <li><img src="../images/pic_9.jpg" alt="사진9"></li>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>optionSelect.html</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select option').on('click', function () {
+                $(this).addClass('selected');
+            });
+
+            $('#plus').on('click', function (event) {
+                event.preventDefault(); // form이라 기본적으로 페이지가 새로고침 되는데 그걸 방지
+                let sel = $('select[name="sub"] :selected');
+                $('select[name="rej"]').append(sel);
+                // $('#rej').append($('.selected'));
+                // $('select option').removeAttr('class');
+            });
+
+            $('#minus').on('click', function (event) {
+                event.preventDefault();
+                let sel = $('select[name="rej"] :selected');
+                $('select[name="sub"]').append(sel);
+                // $('#sub').append($('.selected'));
+                // $('select option').removeAttr('class');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+        <select name="sub" id="sub" size="10">
+            <option>sub-1</option>
+            <option>sub-2</option>
+            <option>sub-3</option>
+            <option>sub-4</option>
+            <option>sub-5</option>
+        </select>
+        <button id="plus">+</button>
+        <button id="minus">-</button>
+        <select name="rej" id="rej" size="10">
+            <option>rej-1</option>
+            <option>rej-2</option>
+            <option>rej-3</option>
+            <option>rej-4</option>
+            <option>rej-5</option>
+        </select>
+    </form>
+</body>
+
+</html>
