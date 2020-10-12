@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
-@WebServlet("/GetProductListJsonServelt")
-public class GetProductListJsonServelt extends HttpServlet {
+@WebServlet("/GetProductListJsonServlet")
+public class GetProductListJsonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetProductListJsonServelt() {
+	public GetProductListJsonServlet() {
 		super();
 	}
 
